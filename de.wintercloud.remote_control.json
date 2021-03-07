@@ -1,0 +1,9 @@
+{
+    "name": "de.wintercloud.remote_control",
+    "description": "Allow controlling chrome from the command line or via REST Api",
+    "path": "/home/nathan/projects/wintercloud/chrome_tab_controller/service/service_main",
+    "type": "stdio",
+    "allowed_origins": [
+        "chrome-extension://ikfejacommpmekbaelahdofdjgiclhhl/"
+    ]
+}
