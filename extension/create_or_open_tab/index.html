@@ -1,0 +1,26 @@
+<head>
+    <script>
+        function on_activate_result(result) {
+            if (!result) {
+                document.location.replace(new URLSearchParams(window.location.search).get("url"))
+            }
+        }
+        // Extract query string parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has("regex")) {
+            chrome.runtime.sendMessage({
+                "command": "activate_tab_by_regex",
+                "regex": urlParams.get("regex"),
+            }, on_activate_result);
+        } else {
+            chrome.runtime.sendMessage({
+                "command": "activate_tab_by_regex",
+                "regex": urlParams.get("url").replaceAll(".", "\\.").replaceAll("?", "\\?") + ".*",
+            }, on_activate_result);
+        }
+    </script>
+</head>
+<html>
+
+<h1>Control me via query parameters</h1>
+</html>
