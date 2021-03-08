@@ -8,8 +8,7 @@
     "service_worker": "background.js"
   },
   "permissions": [
-    "tabs",
-    "nativeMessaging"
+    "tabs"
   ],
   "options_page": "options.html"
 }
