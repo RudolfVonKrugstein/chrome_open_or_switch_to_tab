@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "TabController",
-  "description": "Control Chrome tabs via Json API.",
+  "description": "Actvate a Tab based on a regex or open a new tab if no tab matches the regex.\n\nThis extension uses the options page to either switch to a tab with your desired URL already open or redirect you to the url of no tab matches.",
   "version": "1",
   "author": "Nathan Hüsken",
   "background": {
@@ -11,10 +11,5 @@
     "tabs",
     "nativeMessaging"
   ],
-  "web_accessible_resources": [
-    {
-      "resources": ["create_or_open_tab/index.html"],
-      "matches": []
-    }
-  ]
+  "options_page": "options.html"
 }

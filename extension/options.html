@@ -1,0 +1,64 @@
+<html>
+<head>
+    <title>Activate or Open Tab</title>
+    <script>
+        function on_activate_result(url, result) {
+            if (!result) {
+                document.location.replace(url)
+            }
+        }
+
+        function activate_or_goto(url, regex) {
+            if (regex !== null && regex !== "") {
+                chrome.runtime.sendMessage({
+                    "command": "activate_tab_by_regex",
+                    "regex": regex,
+                }, (res) => on_activate_result(url, res));
+            } else {
+                chrome.runtime.sendMessage({
+                    "command": "activate_tab_by_regex",
+                    "regex": url.replaceAll(".", "\\.").replaceAll("?", "\\?") + ".*",
+                }, (res) => on_activate_result(url, res));
+            }
+        }
+
+        function on_load() {
+            // Extract query string parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has("url")) {
+                activate_or_goto(urlParams.get("url"), urlParams.get("regex"))
+            }
+        }
+
+        function goto_with_form_data() {
+            url = document.getElementById("url_input").value
+            regex = document.getElementById("regex_input").value
+            document.location.replace(create_link(url, regex))
+        }
+
+        function create_link(url, regex) {
+            var query = new URLSearchParams();
+            query.append("url", url)
+            if (regex !== null && regex !== "") {
+                query.append("regex", regex)
+            }
+            return location.origin + location.pathname + "?" + query.toString()
+        }
+
+        function copy_link() {
+            url = document.getElementById("url_input").value
+            regex = document.getElementById("regex_input").value
+            navigator.clipboard.writeText(create_link(url, regex))
+        }
+    </script>
+</head>
+<body onload="on_load()">
+<h1>Activate or Open a Tab by URL and Regex</h1>
+URL:
+<input type="text" id="url_input"></input>
+Regex (optional):
+<input type="text" id="regex_input"></input>
+<button type="submit" onclick="goto_with_form_data()">Go</button>
+<button type="submit" onclick="copy_link()">Copy Link</button>
+</body>
+</html>
