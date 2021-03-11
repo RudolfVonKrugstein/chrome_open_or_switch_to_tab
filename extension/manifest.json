@@ -1,5 +1,8 @@
 {
   "manifest_version": 3,
+  "action": {
+    "default_icon": "icon.png"
+  },
   "name": "TabController",
   "description": "Actvate a Tab based on a regex or open a new tab if no tab matches the regex.",
   "version": "1",
