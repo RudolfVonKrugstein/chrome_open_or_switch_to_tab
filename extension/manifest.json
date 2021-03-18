@@ -5,7 +5,7 @@
   },
   "name": "TabController",
   "description": "Actvate a Tab based on a regex or open a new tab if no tab matches the regex.",
-  "version": "2",
+  "version": "3",
   "author": "Nathan Hüsken",
   "background": {
     "service_worker": "background.js"
